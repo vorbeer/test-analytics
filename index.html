@@ -39,15 +39,14 @@
                     sibCount++;
                   }
                 }
+                var nodeName = el.nodeName.toLowerCase();
+                if (isShadow) {
+                  nodeName += "::shadow";
+                  isShadow = false;
+                }
                 if ( el.hasAttribute('id') && el.id != '' ) { //no id shortcuts, ids are not unique in shadowDom
-                   stack.unshift(el.nodeName.toLowerCase() + '#' + el.id);
-                } else
-                    var nodeName = el.nodeName.toLowerCase();
-                    if (isShadow) {
-                      nodeName += "::shadow";
-                      isShadow = false;
-                    }
-                if ( sibCount > 1 ) {
+                   stack.unshift(nodeName + '#' + el.id);
+                } else if ( sibCount > 1 ) {
                   stack.unshift(nodeName + ':nth-of-type(' + (sibIndex + 1) + ')');
                 } else {
                   stack.unshift(nodeName);
