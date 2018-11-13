@@ -10,13 +10,14 @@
           gtag('config', 'UA-127558849-1');
             
           window.addEventListener("click", function(event){
-              ga('send', {
-                  hitType: 'event',
+              tracker = ga.getAll()[0];
+              if (tracker) {
+                tracker.send('event', {
                   eventCategory: 'tracking',
                   eventAction: 'left-button-click',
                   eventLabel: getDomPath(event.target)
-              });
-              console.log(getDomPath(event.target));
+                });
+             }
           }); 
         </script>
         <script>
